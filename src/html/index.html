@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="<%= htmlWebpackPlugin.options.date %>">
+
+    <title>Kingdom of lists</title>
+
+    <style>
+        body {
+            background: #eeeeee;
+        }
+    </style>
+
+    <link type="image/png" sizes="16x16" rel="icon" href="./images/favicon-16.png">
+    <link type="image/png" sizes="32x32" rel="icon" href="./images/favicon-32.png">
+    <link type="image/png" sizes="96x96" rel="icon" href="./images/favicon-64.png">
+    <link type="image/png" sizes="96x96" rel="icon" href="./images/favicon-96.png">
+
+    <link href="/fonts/icon-font/style.css" rel="stylesheet">
+
+    <meta name="description" content="The best music"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.ru"></script>
+
+</head>
+<body>
+<div id="app">
+    <div class="background"></div>
+</div>
+<script type="text/javascript" src="/./js/bundle.min.js?v=<%= htmlWebpackPlugin.options.date %>"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+.breadcrumbs {
+  height: 30px;
+  background: red;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+
+  > *:not(.separator) {
+    cursor: pointer;
+  }
+
+  > *:not(.separator):hover {
+    text-decoration: underline;
+  }
+
+  > *.separator {
+    cursor: default;
+  }
+}
+
+@media (min-width: 600px) {
+  .breadcrumbs {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
