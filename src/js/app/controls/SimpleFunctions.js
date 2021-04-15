@@ -37,3 +37,24 @@ export function getDigitalParam(index = 0) {
 export function newObject(object = {}) {
     return Object.assign({}, object)
 }
+
+export const runOnKeys = (func, ...codes) => {
+    const pressed = new Set();
+
+    document.addEventListener('keydown', function(event) {
+        pressed.add(event.code);
+
+        for (const code of codes) { // все ли клавиши из набора нажаты?
+            if (!pressed.has(code)) {
+                return;
+            }
+        }
+        pressed.clear();
+
+        func();
+    });
+
+    document.addEventListener('keyup', function(event) {
+        pressed.delete(event.code);
+    });
+};

@@ -18,6 +18,10 @@ body * {
   margin-right: 5px;
 }
 
+.margin-right-10 {
+  margin-right: 10px;
+}
+
 .no-select {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -27,4 +31,25 @@ body * {
   user-select: none;
   /* Non-prefixed version, currently
                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.width-100 {
+  width: 100%
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-table {
+  display: table;
+
+  > * {
+    display: table-row;
+
+    > * {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
