@@ -12,15 +12,18 @@ import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     recipeIngredientBlock: {
-        display: 'flex',
-
         "& >*": {
-            marginRight: 20,
+            marginBottom: 10,
+            "& >*": {
+                marginRight: 20,
+            }
         }
     },
     iconButton: {
         backgroundColor: theme.palette.secondary.light,
         color: theme.palette.secondary.contrastText,
+        textAlign: "center",
+        width: '100%',
 
         "&:hover": {
             backgroundColor: theme.palette.secondary.dark,
@@ -32,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 function IngredientTypes(props) {
     const classes = useStyles()
 
-    const recipeIngredientType = useRef(null)
-    const recipeIngredientName = useRef(null)
+    const [newTypes, setNewTypes] = useState([{}]);
+    const [filter, setFilter] = useState(null);
 
     const [recipeIngredients, setRecipeIngredients] = useState(null)
 
@@ -41,45 +44,52 @@ function IngredientTypes(props) {
         getIngredientTypes();
     }, [])
 
+    useEffect(() => {
+        if (!newTypes) setNewTypes([{}])
+    }, [newTypes])
+
     function getIngredientTypes() {
-        axios.get('types/ingredient')
+        axios.get('recipe/ingredients')
             .then(({data}) => setRecipeIngredients([...data]))
     }
 
     function addIngredientType() {
-        console.log(recipeIngredientName)
-        const data = {
-            name: recipeIngredientName?.current?.value || null,
-            type: recipeIngredientType?.current?.value || null
-        }
-        axios.post('types/ingredient', data)
-            .then(() => {
-                recipeIngredientType.current.value = null;
-                recipeIngredientName.current.value = null;
-                getIngredientTypes();
-            })
+        newTypes.filter(t => t.name).forEach(async t => {
+            await axios.post('recipe/ingredient', t)
+        })
+
+        setNewTypes(null)
+
+        getIngredientTypes();
+
     }
 
     return <div className="settings-secret-part">
         <div>
             <h3>Добавить новый ингридиент рецепта</h3>
             <div className={classes.recipeIngredientBlock}>
-                <TextField label="Название" color="primary"
-                           inputRef={recipeIngredientName}
-                           variant="standard"/>
-                <TextField label="Тип" color="primary"
-                           inputRef={recipeIngredientType}
-                           variant="standard"/>
-                <IconButton className={classes.iconButton} onClick={addIngredientType}>
-                    <AddBoxIcon/>
-                </IconButton>
+                {newTypes && newTypes.map((t, i) => <div>
+                    <TextField label="Название" color="primary"
+                               onChange={(e) => {
+                                   if (newTypes.length - 1 === i) newTypes.push({})
+                                   newTypes[i].name = e.target.value;
+                                   setNewTypes([...newTypes])
+                               }}
+                               className={classes.input} variant="standard"/>
+                </div>)}
+                <Button className={classes.iconButton} onClick={addIngredientType}>
+                    Добавить
+                </Button>
             </div>
             <Divider style={{marginTop: 10, marginBottom: 10}}/>
+            <TextField label="Фильтр" onChange={e => setFilter(e.target.value || null)}/>
             <div className="display-table width-100">
-                {recipeIngredients && recipeIngredients.reverse().map(t => <div>
-                    <div className="margin-right-10">{t.name}</div>
-                    <div className="margin-right-10">{t.type}</div>
-                </div>)}
+                {recipeIngredients && recipeIngredients.sort((a, b) => a.name > b.name ? 1 : -1).filter(i => filter ? i.name.toLowerCase().includes(filter.toLowerCase()) : true).map((t, i) =>
+                    <div>
+                        <div className="margin-right-10">{i + 1}</div>
+                        <div className="margin-right-10">{t.name}</div>
+                        <div className="margin-right-10">{t.type}</div>
+                    </div>)}
             </div>
         </div>
     </div>

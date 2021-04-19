@@ -21,6 +21,7 @@
     "react-preloaders": "^3.0.3",
     "react-range": "^1.6.7",
     "react-router-dom": "^5.2.0",
+    "react-select": "^4.3.0",
     "redux": "^4.0.5",
     "schema-utils": "^2.7.1",
     "webpack-bundle-analyzer": "^3.8.0",

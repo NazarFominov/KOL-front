@@ -1,0 +1,286 @@
+.recipe-list {
+  .recipe-form {
+    margin-bottom: 20px;
+
+    .recipe-fields {
+      display: flex;
+      flex-wrap: wrap;
+
+      .recipe-name {
+        margin-right: 15px;
+        flex-grow: 1;
+        min-width: 50%;
+        padding-top: 8px;
+      }
+
+      .recipe-type {
+        flex-grow: 1;
+        min-width: 320px;
+        margin-bottom: 20px;
+      }
+
+      .recipe-details {
+        flex-grow: 1;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+
+        .title {
+          margin-bottom: 10px;
+        }
+
+        .difficulty {
+          margin-right: 20px;
+          margin-bottom: 20px;
+
+          .levels {
+            > div {
+              width: 25px;
+              border: 1px solid;
+              display: inline-block;
+              cursor: pointer;
+              opacity: 0.2;
+              transition-property: opacity;
+              transition-duration: 100ms;
+            }
+
+            > div:hover,
+            div.active {
+              opacity: 1;
+            }
+
+            > div:nth-child(1) {
+              height: 30px;
+              border-right: none;
+            }
+
+            > div:nth-child(2) {
+              height: 50px;
+              border-right: none;
+            }
+
+            > div:nth-child(3) {
+              height: 70px;
+            }
+          }
+        }
+
+        .favorite-level {
+          margin-bottom: 20px;
+
+          .levels {
+            height: 70px;
+            display: flex;
+            align-items: center;
+
+            > * {
+              font-size: 50px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .ingredients-block {
+        flex-grow: 1;
+        width: 100%;
+        margin-bottom: 20px;
+
+        .title {
+          margin-bottom: 10px;
+        }
+
+        .input-block {
+          position: relative;
+          margin-bottom: 10px;
+
+          .ingredients-variants {
+            display: none;
+            border-radius: 4px;
+            position: absolute;
+            width: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+            background: #fff;
+            z-index: 1300;
+
+            > .ingredient-variant {
+              width: auto;
+              overflow: hidden;
+              font-size: 1rem;
+              box-sizing: border-box;
+              min-height: 48px;
+              font-weight: 400;
+              line-height: 1.5;
+              padding-top: 6px;
+              white-space: nowrap;
+              letter-spacing: 0.00938em;
+              padding-bottom: 6px;
+              display: flex;
+              align-items: center;
+              padding-left: 15px;
+              cursor: pointer;
+            }
+
+            > *:hover {
+              background-color: rgba(0, 0, 0, 0.04);
+            }
+          }
+        }
+
+        .ingredients {
+          display: flex;
+          flex-wrap: wrap;
+
+          > * {
+            margin-right: 5px;
+            border-radius: 15px;
+            padding: 4px 10px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .recipe-link {
+        flex-grow: 1;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .recipe-note {
+        flex-grow: 1;
+        width: 100%;
+        margin-bottom: 20px;
+
+        .title {
+          margin-bottom: 10px;
+        }
+      }
+
+      .recipe-add-button {
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+
+  .recipe-element {
+    .MuiAccordionSummary-content {
+      flex-wrap: wrap;
+    }
+
+    .recipe-short-description {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      //white-space: nowrap;
+      flex-grow: 1;
+
+      > div {
+        margin-right: 5px;
+        padding: 4px 10px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        cursor: default;
+        text-align: center;
+        height: 20px;
+        //border: 1px;
+      }
+    }
+
+    .recipe-fields {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+
+      .difficulty {
+        margin-right: 20px;
+        margin-bottom: 20px;
+
+        > div {
+          width: 15px;
+          border: 1px solid;
+          display: inline-block;
+          cursor: pointer;
+          opacity: 0.2;
+          transition-property: opacity;
+          transition-duration: 100ms;
+        }
+
+        div.active {
+          opacity: 1;
+        }
+
+        > div:nth-child(1) {
+          height: 15px;
+          border-right: none;
+        }
+
+        > div:nth-child(2) {
+          height: 35px;
+          border-right: none;
+        }
+
+        > div:nth-child(3) {
+          height: 55px;
+        }
+      }
+
+      .love-level {
+        margin-right: 20px;
+        margin-bottom: 20px;
+        align-self: center;
+      }
+
+      .link {
+        margin-bottom: 20px;
+        align-self: center;
+        flex-grow: 1;
+      }
+
+      .ingredients {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        flex-grow: 1;
+        width: 100%;
+
+        > * {
+          margin-right: 5px;
+          border-radius: 15px;
+          padding: 4px 10px;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+          cursor: default;
+        }
+      }
+
+      .note {
+        margin-bottom: 20px;
+        align-self: center;
+        flex-grow: 1;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .action-buttons {
+        position: absolute;
+        top: -5px;
+        right: 5px;
+      }
+    }
+  }
+}

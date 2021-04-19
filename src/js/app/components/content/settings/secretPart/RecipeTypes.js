@@ -42,7 +42,7 @@ function RecipeTypes(props) {
     }, [])
 
     function getRecipeTypes() {
-        axios.get('types/recipe')
+        axios.get('recipe/types')
             .then(({data}) => setRecipeTypes([...data]))
     }
 
@@ -52,7 +52,7 @@ function RecipeTypes(props) {
             name: recipeName?.current?.value || null,
             type: recipeType?.current?.value || null
         }
-        axios.post('types/recipe', data)
+        axios.post('recipe/type', data)
             .then(() => {
                 recipeType.current.value = null;
                 recipeName.current.value = null;

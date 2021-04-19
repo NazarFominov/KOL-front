@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     secretField: {
-        width: '100%',
+        width: 300,
         marginBottom: 5,
 
         '& input': {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     addSecretButton: {
-        width: '100%',
+        width: 300,
         display: 'block'
     }
 

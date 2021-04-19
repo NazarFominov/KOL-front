@@ -44,7 +44,7 @@ function AddElement({onClick, fastFolder, fastElement}) {
         setAnchorEl(event.currentTarget);
     };
 
-    const closeSunMenu = () => {
+    const  closeSunMenu = () => {
         setAnchorEl(null);
     };
 
