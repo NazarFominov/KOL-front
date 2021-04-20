@@ -51,14 +51,14 @@ const useStyles = makeStyles((theme) => ({
     difficultyLevel3: {
         backgroundColor: theme.palette.primary.dark
     },
-    favoriteLevelIcon: {
+    loveLevelIcon: {
         color: theme.palette.secondary.main + '44',
 
         "&:hover": {
             color: theme.palette.secondary.dark,
         }
     },
-    favoriteLevelIconActive: {
+    loveLevelIconActive: {
         color: theme.palette.secondary.main,
     },
     ingredient: {
@@ -95,22 +95,25 @@ export function RecipeForm(props) {
     const classes = useStyles()
 
     const {isMobile, onSave, types, ingredients, categories} = props
+    const editableRecipe = props.recipe || {};
 
     const ingredientInput = useRef(null)
     const ingredientsVariants = useRef(null)
+    const nameInput = useRef(null)
+    const linkInput = useRef(null)
+    const noteInput = useRef(null)
 
     const [recipe, setRecipe] = useState({
-        name: null,
-        difficulty: 2,
-        favoriteLevel: 3,
-        link: null,
-        note: null
+        name: editableRecipe.name || null,
+        difficulty: editableRecipe.difficulty || 2,
+        loveLevel: editableRecipe.loveLevel || 3,
+        link: editableRecipe.link || null,
+        note: editableRecipe.note || null
     })
-    const [recipeCategories, setRecipeCategories] = useState([]);
-    const [recipeIngredients, setRecipeIngredients] = useState([]);
-    const [recipeTypes, setRecipeTypes] = useState([]);
+    const [recipeCategories, setRecipeCategories] = useState(editableRecipe?.categories?.map(c => c.id) || []);
+    const [recipeIngredients, setRecipeIngredients] = useState(editableRecipe?.ingredients?.map(i => i.id) || []);
+    const [recipeTypes, setRecipeTypes] = useState(editableRecipe?.types?.map(t => t.id) || []);
 
-    const [ingredientsListAnchor, setIngredientsListAnchor] = useState(null)
     const [ingredientsFilter, setIngredientFilter] = useState(null)
 
     useEffect(() => {
@@ -136,8 +139,8 @@ export function RecipeForm(props) {
         setRecipe(newObject(recipe));
     }
 
-    function setFavoriteLevel(level) {
-        recipe.favoriteLevel = level;
+    function setLoveLevel(level) {
+        recipe.loveLevel = level;
         setRecipe(newObject(recipe))
     }
 
@@ -150,9 +153,27 @@ export function RecipeForm(props) {
         setRecipe(newObject(recipe))
     }
 
+    function cleatForm() {
+        setRecipeTypes([...[]])
+        setRecipeCategories([...[]])
+        setRecipeIngredients([...[]])
+        setRecipe(newObject({
+            name: null,
+            difficulty: 2,
+            loveLevel: 3,
+            link: null,
+            note: null
+        }))
+        ingredientInput.current.value = null;
+        nameInput.current.value = null;
+        linkInput.current.value = null;
+        noteInput.current.value = null;
+        setIngredientFilter(null)
+    }
+
     return <AccordionDetails className={"recipe-fields"}>
-        <TextField label={"Название"} className={'recipe-name'} variant={"standard"}
-                   onChange={e => setRecipeField("name", e.target.value)}/>
+        <TextField label={"Название"} className={'recipe-name'} variant={"standard"} value={recipe.name}
+                   inputRef={nameInput} onChange={e => setRecipeField("name", e.target.value)}/>
         {types && categories && <div className="recipe-type">
             <FormControl className={classes.formControl}>
                 <InputLabel>Тип</InputLabel>
@@ -211,20 +232,20 @@ export function RecipeForm(props) {
                 <div className="title">Любимость</div>
                 <div className="levels">
                     <MoodBad
-                        className={recipe.favoriteLevel === 1 ? classes.favoriteLevelIconActive : classes.favoriteLevelIcon}
-                        onClick={() => setFavoriteLevel(1)}/>
+                        className={recipe.loveLevel === 1 ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                        onClick={() => setLoveLevel(1)}/>
                     <SentimentVeryDissatisfied
-                        className={recipe.favoriteLevel === 2 ? classes.favoriteLevelIconActive : classes.favoriteLevelIcon}
-                        onClick={() => setFavoriteLevel(2)}/>
+                        className={recipe.loveLevel === 2 ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                        onClick={() => setLoveLevel(2)}/>
                     <SentimentSatisfied
-                        className={recipe.favoriteLevel === 3 ? classes.favoriteLevelIconActive : classes.favoriteLevelIcon}
-                        onClick={() => setFavoriteLevel(3)}/>
+                        className={recipe.loveLevel === 3 ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                        onClick={() => setLoveLevel(3)}/>
                     <SentimentSatisfiedAlt
-                        className={recipe.favoriteLevel === 4 ? classes.favoriteLevelIconActive : classes.favoriteLevelIcon}
-                        onClick={() => setFavoriteLevel(4)}/>
+                        className={recipe.loveLevel === 4 ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                        onClick={() => setLoveLevel(4)}/>
                     <InsertEmoticon
-                        className={recipe.favoriteLevel === 5 ? classes.favoriteLevelIconActive : classes.favoriteLevelIcon}
-                        onClick={() => setFavoriteLevel(5)}/>
+                        className={recipe.loveLevel === 5 ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                        onClick={() => setLoveLevel(5)}/>
                 </div>
             </div>
         </div>
@@ -269,22 +290,32 @@ export function RecipeForm(props) {
             <div style={{opacity: 0.7}}>(кликните на игредиент для удаления)</div>}
         </div>}
         <div className="recipe-link">
-            <TextField variant={"standard"} label={"Ссылка"} className={classes.recipeLink}
+            <TextField variant={"standard"} inputMode={"url"} value={recipe.link} label={"Ссылка"}
+                       className={classes.recipeLink} inputRef={linkInput}
                        onChange={e => setRecipeField("link", e.target.value)}/>
         </div>
         <div className="recipe-note">
-            <TextField multiline variant={"outlined"} label={"Заметка"} className="width-100"
+            <TextField multiline variant={"outlined"} value={recipe.note} label={"Заметка"}
+                       className="width-100" inputRef={noteInput}
                        onChange={e => setRecipeField("note", e.target.value)}/>
         </div>
         <div className={"recipe-add-button"}>
             <Button variant="contained" color="primary"
+                    className={clsx(isMobile ? "width-100" : "", "margin-right-10")}
+                    onClick={props.onCancel ? props.onCancel : cleatForm}>
+                {props.onCancel ? "Отмена" : "Очистить"}
+            </Button>
+            <Button variant="contained" color="primary"
                     className={clsx(isMobile ? "width-100" : "")}
-                    onClick={() => onSave({
-                        ...recipe,
-                        types: recipeTypes,
-                        categories: recipeCategories,
-                        ingredients: recipeIngredients
-                    })}>
+                    onClick={() => {
+                        cleatForm();
+                        onSave({
+                            ...recipe,
+                            types: recipeTypes,
+                            categories: recipeCategories,
+                            ingredients: recipeIngredients
+                        })
+                    }}>
                 Сохранить
             </Button>
         </div>
@@ -304,13 +335,22 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({});
 
 function RecipeFormBlock(props) {
-    return <div className="recipe-form">
-        <Accordion>
+    const {expandedMode, title} = props;
+
+    const [expanded, setExpanded] = useState(false)
+
+    return <div className="recipe-form margin-top-10">
+        <Accordion expanded={props.hasOwnProperty("expandedMode") ? expandedMode : expanded}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                              onClick={() => setExpanded(!expanded)}
                               aria-controls="panel1a-content">
-                <Typography>Сохранить рецепт</Typography>
+                <Typography>{title || "Добавление рецепта"}</Typography>
             </AccordionSummary>
-            <RecipeForm {...props}/>
+            <RecipeForm {...props}
+                        onSave={(recipe) => {
+                            props.onSave(recipe)
+                            setExpanded(false);
+                        }}/>
         </Accordion>
     </div>
 }

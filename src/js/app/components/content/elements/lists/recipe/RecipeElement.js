@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types'
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -54,12 +54,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 function RecipeFormBlock(props) {
-    const {recipe, onDelete} = props
+    const {recipe, onDelete, onSetEdit} = props
 
     const classes = useStyles();
 
-    return <div className="recipe-element">
-        <Accordion>
+    const [expanded, setExpanded] = useState(false)
+
+    return <div className={clsx("recipe-element", expanded ? "margin-top-10 margin-bottom-10" : "")}>
+        <Accordion onChange={(e, v) => setExpanded(v)}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 <Typography className="flex-grow-1 margin-right-10"
                             style={{fontSize: 16}}>{recipe.name}</Typography>
@@ -68,10 +70,6 @@ function RecipeFormBlock(props) {
                         {recipe.types && Boolean(recipe.types.length) && (recipe.types.map(el => el.name).join(", ").toLowerCase() + " | ")}
                         {recipe.categories.map(el => el.name).join(", ").toLowerCase()}
                     </span>
-                    {/*{recipe.types.map(t => <div key={t.id}*/}
-                    {/*                            className={classes.type}>{t.name}</div>)}*/}
-                    {/*{recipe.categories.map(c => <div key={c.id}*/}
-                    {/*                                 className={classes.category}>{c.name}</div>)}*/}
                 </div>
             </AccordionSummary>
             <AccordionDetails className="recipe-fields">
@@ -103,7 +101,7 @@ function RecipeFormBlock(props) {
                 </div>}
                 {recipe.note && <div className="note">{recipe.note}</div>}
                 <div className="action-buttons">
-                    <IconButton>
+                    <IconButton onClick={onSetEdit}>
                         <EditIcon/>
                     </IconButton>
                     <IconButton onClick={onDelete}>
@@ -117,7 +115,8 @@ function RecipeFormBlock(props) {
 
 RecipeFormBlock.propTypes = {
     recipe: PropTypes.object,
-    onDelete: PropTypes.func
+    onDelete: PropTypes.func,
+    onSetEdit: PropTypes.func
 }
 
 export default RecipeFormBlock
