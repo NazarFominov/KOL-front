@@ -65,7 +65,7 @@ function ElementModal(props) {
                    aria-labelledby="max-width-dialog-title">
         <DialogTitle>Добавление элемента</DialogTitle>
         <DialogContent>
-            <form className={classes.form} noValidate>
+            <div className={classes.form}>
                 {element.method === "post" && <div>
                     <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="element-type">Тип</InputLabel>
@@ -117,7 +117,7 @@ function ElementModal(props) {
                                element.description = e.target.value || null;
                                setElement(newObject(element))
                            }}/>
-            </form>
+            </div>
         </DialogContent>
         <DialogActions>
             <Button onClick={close} color="primary">

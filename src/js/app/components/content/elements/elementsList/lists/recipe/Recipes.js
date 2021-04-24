@@ -16,6 +16,8 @@ import RecipeForm, {RecipeForm as RecipeFormForElement} from "./RecipeForm";
 import RecipeElement from "./RecipeElement";
 import {connect} from "react-redux";
 import {setDialogModal} from "../../../../../../../redux/actions";
+import Filter from "./Filter";
+import {newObject} from "../../../../../../controls/SimpleFunctions";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -39,6 +41,12 @@ function Recipes(props) {
 
     const [preloader, setPreloader] = useState(true)
     const [editableId, setEditableId] = useState(null)
+    const [filter, setFilter] = useState({
+        name: null,
+        types: [],
+        categories: [],
+        ingredients: []
+    })
 
     const [types, setTypes] = useState(null)
     const [categories, setCategories] = useState(null)
@@ -90,6 +98,17 @@ function Recipes(props) {
         axios.delete(`list/${list.id}/recipe/${recipeId}`).then(getRecipeList)
     }
 
+    function setFilterFiledValue(field, value) {
+        filter[field] = value;
+        setFilter(newObject(filter))
+    }
+
+    function sortByFieldArray(recipe, field) {
+        return filter[field] && Array.isArray(filter[field]) && filter[field].length
+            ? recipe[field].some(f => filter[field].includes(f.id))
+            : true
+    }
+
     return <Dialog fullScreen open={open} onClose={close} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
             <Toolbar>
@@ -106,28 +125,38 @@ function Recipes(props) {
                                                                types={types}
                                                                categories={categories}
                                                                ingredients={ingredients}/>}
-            {recipes && recipes.map(r => editableId === r.id ?
-                <RecipeForm recipe={r}
-                            key={r.id}
-                            expandedMode={true}
-                            types={types}
-                            title={"Редактирование рецепта"}
-                            categories={categories}
-                            ingredients={ingredients}
-                            onSave={(recipe) => {
-                                setEditableId(null)
-                                sendRecipe("put", {...recipe, id: r.id})
-                            }}
-                            onCancel={() => setEditableId(null)}/> :
-                <RecipeElement key={r.id}
-                               recipe={r}
-                               onSetEdit={() => setEditableId(r.id)}
-                               onDelete={() => setDialogModal({
-                                   open: true,
-                                   agree: () => deleteRecipe(r.id),
-                                   title: "Внимание",
-                                   message: `Вы хотите удалить "${r.name}"?`
-                               })}/>)}
+            <Filter setFilter={setFilterFiledValue}
+                    filter={filter}
+                    types={types}
+                    categories={categories}
+                    ingredients={ingredients}/>
+            {recipes && recipes
+                .filter(r => filter.name ? r.name.toLowerCase().includes(filter.name.toLowerCase()) : true)
+                .filter(r => sortByFieldArray(r, 'types'))
+                .filter(r => sortByFieldArray(r, 'categories'))
+                .filter(r => sortByFieldArray(r, 'ingredients'))
+                .map(r => editableId === r.id ?
+                    <RecipeForm recipe={r}
+                                key={r.id}
+                                expandedMode={true}
+                                types={types}
+                                title={"Редактирование рецепта"}
+                                categories={categories}
+                                ingredients={ingredients}
+                                onSave={(recipe) => {
+                                    setEditableId(null)
+                                    sendRecipe("put", {...recipe, id: r.id})
+                                }}
+                                onCancel={() => setEditableId(null)}/> :
+                    <RecipeElement key={r.id}
+                                   recipe={r}
+                                   onSetEdit={() => setEditableId(r.id)}
+                                   onDelete={() => setDialogModal({
+                                       open: true,
+                                       agree: () => deleteRecipe(r.id),
+                                       title: "Внимание",
+                                       message: `Вы хотите удалить "${r.name}"?`
+                                   })}/>)}
             {preloader && <Preloader/>}
         </DialogContent>
     </Dialog>
