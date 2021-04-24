@@ -11,8 +11,8 @@ import Slide from '@material-ui/core/Slide';
 import PropTypes from 'prop-types'
 import DialogContent from "@material-ui/core/DialogContent";
 import axios from 'axios'
-import {convertObjectToQueryString} from "../../../../controls/Convert";
-import Preloader from "../../../../controls/Preloader";
+import {convertObjectToQueryString} from "../../../../../controls/Convert";
+import Preloader from "../../../../../controls/Preloader";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {

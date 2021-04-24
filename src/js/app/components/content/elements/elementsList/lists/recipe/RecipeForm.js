@@ -10,7 +10,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import {newObject} from "../../../../../controls/SimpleFunctions";
+import {newObject} from "../../../../../../controls/SimpleFunctions";
 import {makeStyles} from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -27,13 +27,13 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 import {Link} from "react-router-dom";
-import {themes} from "../../../../../controls/constants/themes";
+import {themes} from "../../../../../../controls/constants/themes";
 import Menu from "@material-ui/core/Menu";
 import clsx from "clsx";
 import Button from '@material-ui/core/Button';
-import isMobile from "../../../../../../redux/reducers/isMobile";
+import isMobile from "../../../../../../../redux/reducers/isMobile";
 import PropTypes from "prop-types";
-import {setTheme} from "../../../../../../redux/actions";
+import {setTheme} from "../../../../../../../redux/actions";
 import {connect} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({

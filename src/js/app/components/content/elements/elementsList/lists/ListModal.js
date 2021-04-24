@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Notes from "./Notes";
 import PropTypes from 'prop-types'
-import Preloader from "../../../../controls/Preloader";
+import Preloader from "../../../../../controls/Preloader";
 import Recipes from "./recipe/Recipes";
 
 function ListModal(props) {

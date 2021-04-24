@@ -4,7 +4,7 @@ import Route from 'react-router-dom/Route'
 import {connect} from 'react-redux'
 import {Container} from "@material-ui/core";
 import Settings from "./settings/Settings";
-import ElementsList from "./elements/ElementsList";
+import ElementsList from "./elements/elementsList/ElementsList";
 import NotFound from "./404";
 import {getDigitalParam} from "../../controls/SimpleFunctions";
 import PropTypes from "prop-types";

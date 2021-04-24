@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import clsx from 'clsx'
 import {connect} from 'react-redux'
-import Element from "./Element";
-import AddElement from "./AddElement";
-import ElementModal from "./ElementModal";
-import {convertObjectToQueryString} from "../../../controls/Convert";
+import Element from "./element/Element";
+import AddElement from "./element/AddElement";
+import ElementModal from "./element/ElementModal";
+import {convertObjectToQueryString} from "../../../../controls/Convert";
 import axios from "axios";
 import PropTypes, {element} from "prop-types";
 import {
@@ -12,9 +12,9 @@ import {
     setCancelToken,
     setDialogModal,
     setFavoritesList,
-} from "../../../../redux/actions";
-import FoldersModal from "../../../controls/modal/FoldersModal";
-import {getFavorites} from "../../../controls/InitialRequests";
+} from "../../../../../redux/actions";
+import FoldersModal from "../../../../controls/modal/FoldersModal";
+import {getFavorites} from "../../../../controls/InitialRequests";
 import ListModal from "./lists/ListModal";
 
 function ElementsList(props) {

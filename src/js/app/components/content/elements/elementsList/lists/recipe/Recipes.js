@@ -10,12 +10,12 @@ import Slide from '@material-ui/core/Slide';
 import PropTypes from 'prop-types'
 import DialogContent from "@material-ui/core/DialogContent";
 import axios from 'axios'
-import {convertObjectToQueryString} from "../../../../../controls/Convert";
-import Preloader from "../../../../../controls/Preloader";
+import {convertObjectToQueryString} from "../../../../../../controls/Convert";
+import Preloader from "../../../../../../controls/Preloader";
 import RecipeForm, {RecipeForm as RecipeFormForElement} from "./RecipeForm";
 import RecipeElement from "./RecipeElement";
 import {connect} from "react-redux";
-import {setDialogModal} from "../../../../../../redux/actions";
+import {setDialogModal} from "../../../../../../../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {

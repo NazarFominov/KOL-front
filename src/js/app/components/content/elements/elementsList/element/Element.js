@@ -22,9 +22,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import PropTypes from "prop-types";
 import Redirect from "react-router-dom/Redirect";
-import {setFavoritesList} from "../../../../redux/actions";
-import favoritesList from "../../../../redux/reducers/favoritesList";
-import {getFavorites} from "../../../controls/InitialRequests";
+import {setFavoritesList} from "../../../../../../redux/actions";
+import favoritesList from "../../../../../../redux/reducers/favoritesList";
+import {getFavorites} from "../../../../../controls/InitialRequests";
 
 const useStyles = makeStyles((theme) => ({
     element: {

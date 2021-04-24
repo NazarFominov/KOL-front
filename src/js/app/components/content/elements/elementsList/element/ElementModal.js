@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import {newObject} from "../../../controls/SimpleFunctions";
+import {newObject} from "../../../../../controls/SimpleFunctions";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
