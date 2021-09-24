@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --env.NODE_IP=localhost",
     "build": "webpack -p --env.RELEASE=production",
-    "local-test": "webpack-dev-server --host 192.168.0.95"
+    "local-test": "webpack-dev-server --env.NODE_IP=192.168.0.12 --host 192.168.0.12"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -33,6 +33,7 @@
     "@babel/preset-react": "^7.10.4",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.3",
+    "@mui/material": "^5.0.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.2.2",

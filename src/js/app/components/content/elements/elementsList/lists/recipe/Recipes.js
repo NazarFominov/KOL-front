@@ -45,7 +45,9 @@ function Recipes(props) {
         name: null,
         types: [],
         categories: [],
-        ingredients: []
+        ingredients: [],
+        loveLevel: [],
+        difficulty: null,
     })
 
     const [types, setTypes] = useState(null)
@@ -135,6 +137,8 @@ function Recipes(props) {
                 .filter(r => sortByFieldArray(r, 'types'))
                 .filter(r => sortByFieldArray(r, 'categories'))
                 .filter(r => sortByFieldArray(r, 'ingredients'))
+                .filter(r => filter.loveLevel.length ? filter.loveLevel.includes(r.loveLevel) : true)
+                .filter(r => filter.difficulty ? r.difficulty === filter.difficulty : true)
                 .map(r => editableId === r.id ?
                     <RecipeForm recipe={r}
                                 key={r.id}

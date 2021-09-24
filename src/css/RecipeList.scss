@@ -65,21 +65,6 @@
             }
           }
         }
-
-        .favorite-level {
-          margin-bottom: 20px;
-
-          .levels {
-            height: 70px;
-            display: flex;
-            align-items: center;
-
-            > * {
-              font-size: 50px;
-              cursor: pointer;
-            }
-          }
-        }
       }
 
       .ingredients-block {
@@ -282,6 +267,63 @@
         position: absolute;
         top: -5px;
         right: 5px;
+      }
+    }
+  }
+
+  .favorite-level {
+    margin-bottom: 20px;
+
+    .levels {
+      height: 70px;
+      display: flex;
+      align-items: center;
+
+      > * {
+        font-size: 50px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .recipe-filter {
+    .title {
+      margin-bottom: 10px;
+    }
+
+    .difficulty {
+      margin-right: 20px;
+      margin-bottom: 20px;
+
+      .levels {
+        > div {
+          width: 25px;
+          border: 1px solid;
+          display: inline-block;
+          cursor: pointer;
+          opacity: 0.2;
+          transition-property: opacity;
+          transition-duration: 100ms;
+        }
+
+        > div:hover,
+        div.active {
+          opacity: 1;
+        }
+
+        > div:nth-child(1) {
+          height: 30px;
+          border-right: none;
+        }
+
+        > div:nth-child(2) {
+          height: 50px;
+          border-right: none;
+        }
+
+        > div:nth-child(3) {
+          height: 70px;
+        }
       }
     }
   }

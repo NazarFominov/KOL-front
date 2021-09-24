@@ -94,7 +94,7 @@ module.exports = (env) => {
                     RELEASE: env && env.hasOwnProperty('RELEASE') ?
                         JSON.stringify(env.RELEASE) :
                         JSON.stringify('development'),
-                    NODE_IP: JSON.stringify(process.env.NODE_IP) || JSON.stringify('localhost')
+                    NODE_IP: JSON.stringify(env.NODE_IP) || JSON.stringify('localhost')
                 },
             }),
             new webpack.ContextReplacementPlugin(

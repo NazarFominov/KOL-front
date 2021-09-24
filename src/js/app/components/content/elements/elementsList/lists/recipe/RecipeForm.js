@@ -173,7 +173,7 @@ export function RecipeForm(props) {
 
     return <AccordionDetails className={"recipe-fields"}>
         <TextField label={"Название"} className={'recipe-name'} variant={"standard"} value={recipe.name}
-                   inputRef={nameInput} onChange={e => setRecipeField("name", e.target.value)}/>
+                   inputRef={nameInput} onChange={e => setRecipeField("name", e.target.value.trim())}/>
         {types && categories && <div className="recipe-type">
             <FormControl className={classes.formControl}>
                 <InputLabel>Тип</InputLabel>
@@ -231,9 +231,8 @@ export function RecipeForm(props) {
             <div className="favorite-level">
                 <div className="title">Любимость</div>
                 <div className="levels">
-                    <MoodBad
-                        className={recipe.loveLevel === 1 ? classes.loveLevelIconActive : classes.loveLevelIcon}
-                        onClick={() => setLoveLevel(1)}/>
+                    <MoodBad className={recipe.loveLevel === 1 ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                             onClick={() => setLoveLevel(1)}/>
                     <SentimentVeryDissatisfied
                         className={recipe.loveLevel === 2 ? classes.loveLevelIconActive : classes.loveLevelIcon}
                         onClick={() => setLoveLevel(2)}/>

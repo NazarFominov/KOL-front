@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {Container} from "@material-ui/core";
 import Settings from "./settings/Settings";
 import ElementsList from "./elements/elementsList/ElementsList";
+import Generator from "./generator/Generator";
 import NotFound from "./404";
 import {getDigitalParam} from "../../controls/SimpleFunctions";
 import PropTypes from "prop-types";
@@ -20,6 +21,7 @@ function Content(props) {
     return <Container>
         <Switch>
             <Route path={'/settings'} component={Settings}/>
+            <Route path={'/generator'} component={Generator}/>
             <Route paths={['/', '/search', '/:id']} render={() => {
                 if (location.pathname === "/") return <ElementsList/>
                 else {

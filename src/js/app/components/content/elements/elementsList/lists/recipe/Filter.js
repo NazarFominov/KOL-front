@@ -88,6 +88,25 @@ const useStyles = makeStyles((theme) => ({
             color: theme.palette.primary.contrastText
         }
     },
+    loveLevelIcon: {
+        color: theme.palette.secondary.main + '44',
+
+        "&:hover": {
+            color: theme.palette.secondary.dark,
+        }
+    },
+    loveLevelIconActive: {
+        color: theme.palette.secondary.main,
+    },
+    difficultyLevel1: {
+        backgroundColor: theme.palette.primary.light
+    },
+    difficultyLevel2: {
+        backgroundColor: theme.palette.primary.main
+    },
+    difficultyLevel3: {
+        backgroundColor: theme.palette.primary.dark
+    },
 }));
 
 const MenuProps = {
@@ -98,7 +117,6 @@ const MenuProps = {
         },
     },
 };
-
 
 function Filter(props) {
     const classes = useStyles();
@@ -125,7 +143,7 @@ function Filter(props) {
     }
 
     return categories && ingredients && types
-        ? <Accordion className="margin-bottom-20">
+        ? <Accordion className="margin-bottom-20 recipe-filter">
             <AccordionSummary expandIcon={<ExpandMoreIcon/>} className={classes.sum}>
                 <TextField variant={"standard"}
                            placeholder={"Название"}
@@ -178,6 +196,37 @@ function Filter(props) {
                             </MenuItem>)}
                     </Select>
                 </FormControl>
+                <div className="difficulty">
+                    <div className="title">Сложность</div>
+                    <div className="levels">
+                        <div onClick={() => setFilter('difficulty', filter.difficulty === 1 ? null : 1)}
+                             className={clsx(classes.difficultyLevel1, filter.difficulty >= 1 ? "active" : "")}/>
+                        <div onClick={() => setFilter('difficulty', filter.difficulty === 2 ? null : 2)}
+                             className={clsx(classes.difficultyLevel2, filter.difficulty >= 2 ? "active" : "")}/>
+                        <div onClick={() => setFilter('difficulty', filter.difficulty === 3 ? null : 3)}
+                             className={clsx(classes.difficultyLevel3, filter.difficulty === 3 ? "active" : "")}/>
+                    </div>
+                </div>
+                <div className="favorite-level">
+                    <div className="title">Любимость</div>
+                    <div className="levels">
+                        <MoodBad
+                            className={filter.loveLevel.includes(1) ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                            onClick={() => setFilter('loveLevel', filter.loveLevel.includes(1) ? filter.loveLevel.filter(l => l !== 1) : [...filter.loveLevel, 1])}/>
+                        <SentimentVeryDissatisfied
+                            className={filter.loveLevel.includes(2) ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                            onClick={() => setFilter('loveLevel', filter.loveLevel.includes(2) ? filter.loveLevel.filter(l => l !== 2) : [...filter.loveLevel, 2])}/>
+                        <SentimentSatisfied
+                            className={filter.loveLevel.includes(3) ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                            onClick={() => setFilter('loveLevel', filter.loveLevel.includes(3) ? filter.loveLevel.filter(l => l !== 3) : [...filter.loveLevel, 3])}/>
+                        <SentimentSatisfiedAlt
+                            className={filter.loveLevel.includes(4) ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                            onClick={() => setFilter('loveLevel', filter.loveLevel.includes(4) ? filter.loveLevel.filter(l => l !== 4) : [...filter.loveLevel, 4])}/>
+                        <InsertEmoticon
+                            className={filter.loveLevel.includes(5) ? classes.loveLevelIconActive : classes.loveLevelIcon}
+                            onClick={() => setFilter('loveLevel', filter.loveLevel.includes(5) ? filter.loveLevel.filter(l => l !== 5) : [...filter.loveLevel, 5])}/>
+                    </div>
+                </div>
                 <div className={classes.ingredientsBlock}>
                     <TextField variant="standard" placeholder={"Игредиенты"} inputRef={ingredientInput}
                                className="margin-bottom-5"

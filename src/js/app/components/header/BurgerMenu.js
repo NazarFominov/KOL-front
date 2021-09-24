@@ -65,17 +65,15 @@ function BurgerMenu({isOpen, onChangeState = console.log, favorites}) {
             <List>
                 {[
                     {label: 'Списки', to: '/', onClick: () => null, icon: <ListAltIcon/>},
-                    {label: 'Генератор рецептов', to: '/', onClick: () => null},
-                    {label: 'Генератор фильмов', to: '/', onClick: () => null},
-                ]
-                    .map(({label, onClick, to, icon}) => (
-                        <Link to={to} className={classes.link}>
-                            <ListItem button>
-                                <ListItemIcon>{icon}</ListItemIcon>
-                                <ListItemText primary={label}/>
-                            </ListItem>
-                        </Link>
-                    ))}
+                    {label: 'Генератор меню', to: '/generator/menu', onClick: () => null},
+                ].map(({label, onClick, to, icon}) => (
+                    <Link to={to} className={classes.link}>
+                        <ListItem button>
+                            <ListItemIcon>{icon}</ListItemIcon>
+                            <ListItemText primary={label}/>
+                        </ListItem>
+                    </Link>
+                ))}
             </List>
             <Divider/>
             <List>
@@ -130,7 +128,6 @@ BurgerMenu.propTypes = {
 const mapStateToProps = (state) => ({
     favorites: state.favoritesList,
 })
-const mapDispatchToProps = (dispatch) => ({
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(BurgerMenu)
