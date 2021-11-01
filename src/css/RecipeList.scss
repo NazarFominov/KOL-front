@@ -1,3 +1,116 @@
+.recipe-element {
+  transition-property: margin-bottom, margin-top;
+  transition-duration: 400ms;
+
+  .MuiAccordionSummary-content {
+    flex-wrap: wrap;
+  }
+
+  .recipe-short-description {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    //white-space: nowrap;
+    flex-grow: 1;
+
+    > div {
+      margin-right: 5px;
+      padding: 4px 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      cursor: default;
+      text-align: center;
+      height: 20px;
+      //border: 1px;
+    }
+  }
+
+  .recipe-fields {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    .difficulty {
+      margin-right: 20px;
+      margin-bottom: 20px;
+
+      > div {
+        width: 15px;
+        border: 1px solid;
+        display: inline-block;
+        cursor: pointer;
+        opacity: 0.2;
+        transition-property: opacity;
+        transition-duration: 100ms;
+      }
+
+      div.active {
+        opacity: 1;
+      }
+
+      > div:nth-child(1) {
+        height: 15px;
+        border-right: none;
+      }
+
+      > div:nth-child(2) {
+        height: 35px;
+        border-right: none;
+      }
+
+      > div:nth-child(3) {
+        height: 55px;
+      }
+    }
+
+    .love-level {
+      margin-right: 20px;
+      margin-bottom: 20px;
+      align-self: center;
+    }
+
+    .link {
+      margin-bottom: 20px;
+      align-self: center;
+      flex-grow: 1;
+    }
+
+    .ingredients {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      flex-grow: 1;
+      width: 100%;
+
+      > * {
+        margin-right: 5px;
+        border-radius: 15px;
+        padding: 4px 10px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        cursor: default;
+      }
+    }
+
+    .note {
+      margin-bottom: 20px;
+      align-self: center;
+      flex-grow: 1;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .action-buttons {
+      position: absolute;
+      top: -5px;
+      right: 5px;
+    }
+  }
+}
 .recipe-list {
   .recipe-form {
     margin-bottom: 20px;
@@ -153,120 +266,6 @@
         flex-grow: 1;
         display: flex;
         justify-content: flex-end;
-      }
-    }
-  }
-
-  .recipe-element {
-    transition-property: margin-bottom, margin-top;
-    transition-duration: 400ms;
-
-    .MuiAccordionSummary-content {
-      flex-wrap: wrap;
-    }
-
-    .recipe-short-description {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      //white-space: nowrap;
-      flex-grow: 1;
-
-      > div {
-        margin-right: 5px;
-        padding: 4px 10px;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px;
-        cursor: default;
-        text-align: center;
-        height: 20px;
-        //border: 1px;
-      }
-    }
-
-    .recipe-fields {
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-
-      .difficulty {
-        margin-right: 20px;
-        margin-bottom: 20px;
-
-        > div {
-          width: 15px;
-          border: 1px solid;
-          display: inline-block;
-          cursor: pointer;
-          opacity: 0.2;
-          transition-property: opacity;
-          transition-duration: 100ms;
-        }
-
-        div.active {
-          opacity: 1;
-        }
-
-        > div:nth-child(1) {
-          height: 15px;
-          border-right: none;
-        }
-
-        > div:nth-child(2) {
-          height: 35px;
-          border-right: none;
-        }
-
-        > div:nth-child(3) {
-          height: 55px;
-        }
-      }
-
-      .love-level {
-        margin-right: 20px;
-        margin-bottom: 20px;
-        align-self: center;
-      }
-
-      .link {
-        margin-bottom: 20px;
-        align-self: center;
-        flex-grow: 1;
-      }
-
-      .ingredients {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-        flex-grow: 1;
-        width: 100%;
-
-        > * {
-          margin-right: 5px;
-          border-radius: 15px;
-          padding: 4px 10px;
-          font-size: 16px;
-          display: flex;
-          align-items: center;
-          margin-bottom: 5px;
-          cursor: default;
-        }
-      }
-
-      .note {
-        margin-bottom: 20px;
-        align-self: center;
-        flex-grow: 1;
-        max-height: 300px;
-        overflow-y: auto;
-      }
-
-      .action-buttons {
-        position: absolute;
-        top: -5px;
-        right: 5px;
       }
     }
   }

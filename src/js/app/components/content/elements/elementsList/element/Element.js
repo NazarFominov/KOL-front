@@ -15,6 +15,8 @@ import {
     FormatListBulleted as FormatListBulletedIcon,
     ShoppingCart as ShoppingCartIcon,
     FormatListNumbered as FormatListNumberedIcon,
+    RestaurantMenu as RestaurantMenuIcon,
+    MenuBook as MenuBookIcon,
     ListAlt as ListAltIcon
 } from "@material-ui/icons";
 import {CardContent} from "@material-ui/core";
@@ -127,7 +129,10 @@ function Element(props) {
                                         return <TheatersIcon
                                             className={clsx(classes.icon, 'vertical-align-middle', 'margin-right-5')}/>
                                     case 'recipes':
-                                        return <FormatListNumberedIcon
+                                        return <RestaurantMenuIcon
+                                            className={clsx(classes.icon, 'vertical-align-middle', 'margin-right-5')}/>
+                                    case 'menu':
+                                        return <MenuBookIcon
                                             className={clsx(classes.icon, 'vertical-align-middle', 'margin-right-5')}/>
                                 }
                             }

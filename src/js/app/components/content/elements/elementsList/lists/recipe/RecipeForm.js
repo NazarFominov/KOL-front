@@ -173,7 +173,7 @@ export function RecipeForm(props) {
 
     return <AccordionDetails className={"recipe-fields"}>
         <TextField label={"Название"} className={'recipe-name'} variant={"standard"} value={recipe.name}
-                   inputRef={nameInput} onChange={e => setRecipeField("name", e.target.value.trim())}/>
+                   inputRef={nameInput} onChange={e => setRecipeField("name", e.target.value)}/>
         {types && categories && <div className="recipe-type">
             <FormControl className={classes.formControl}>
                 <InputLabel>Тип</InputLabel>
@@ -310,6 +310,7 @@ export function RecipeForm(props) {
                         cleatForm();
                         onSave({
                             ...recipe,
+                            name: typeof recipe.name === 'string' ? recipe.name.trim() : null,
                             types: recipeTypes,
                             categories: recipeCategories,
                             ingredients: recipeIngredients

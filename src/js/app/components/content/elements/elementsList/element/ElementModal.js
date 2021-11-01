@@ -91,7 +91,7 @@ function ElementModal(props) {
                                     name: 'list-type',
                                     id: 'list-type',
                                 }}>
-                            {listTypes.map(t => <MenuItem value={t.id} key={t.id}>
+                            {listTypes.filter(t => t.isSelectable).map(t => <MenuItem value={t.id} key={t.id}>
                                 {t.name}
                             </MenuItem>)}
                         </Select>

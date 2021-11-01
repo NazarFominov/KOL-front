@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --env.NODE_IP=localhost",
     "build": "webpack -p --env.RELEASE=production",
-    "local-test": "webpack-dev-server --env.NODE_IP=192.168.0.12 --host 192.168.0.12"
+    "local-test": "webpack-dev-server --env.NODE_IP=95.32.73.101 --host 95.32.73.101"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",

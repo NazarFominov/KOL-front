@@ -54,13 +54,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 function RecipeFormBlock(props) {
-    const {recipe, onDelete, onSetEdit} = props
+    const {recipe, onDelete, onSetEdit, showControls, style, className} = props
 
     const classes = useStyles();
 
     const [expanded, setExpanded] = useState(false)
 
-    return <div className={clsx("recipe-element", expanded ? "margin-top-10 margin-bottom-10" : "")}>
+    return <div className={clsx("recipe-element", className, expanded ? "margin-top-10 margin-bottom-10" : "")}
+                style={style}>
         <Accordion onChange={(e, v) => setExpanded(v)}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 <Typography className="flex-grow-1 margin-right-10"
@@ -99,24 +100,33 @@ function RecipeFormBlock(props) {
                 {recipe.ingredients && <div className="ingredients">
                     {recipe.ingredients.map(i => <div key={i.id} className={classes.ingredient}>{i.name}</div>)}
                 </div>}
-                {recipe.note && <div className="note">{recipe.note}</div>}
-                <div className="action-buttons">
+                {recipe.note && <div className="note">{recipe.note.split('\n').map(n => <div>{n}</div>)}</div>}
+                {showControls && <div className="action-buttons">
                     <IconButton onClick={onSetEdit}>
                         <EditIcon/>
                     </IconButton>
                     <IconButton onClick={onDelete}>
                         <DeleteIcon/>
                     </IconButton>
-                </div>
+                </div>}
             </AccordionDetails>
         </Accordion>
     </div>
 }
 
+RecipeFormBlock.defaultProps = {
+    showControls: true,
+    style: {},
+    className: '',
+}
+
 RecipeFormBlock.propTypes = {
     recipe: PropTypes.object,
+    showControls: PropTypes.bool,
     onDelete: PropTypes.func,
-    onSetEdit: PropTypes.func
+    onSetEdit: PropTypes.func,
+    style: PropTypes.object,
+    className: PropTypes.string,
 }
 
 export default RecipeFormBlock
